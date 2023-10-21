@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 namespace JobPortal_JobConnect.Models
 {
    
 
-    public class UserAuthModel
+    public class UserAuthModel: IdentityUser
     {
         [Required]
         public string UserAuthName { get; set; }
