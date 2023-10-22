@@ -17,7 +17,7 @@ namespace JobPortal_JobConnect.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        // Additional user properties, such as roles, can be added here.
+        // Additional user properties, such as roles, added here and later stage if time permit
     }
 
 }
