@@ -1,6 +1,7 @@
 ﻿using JobPortal_JobConnect.Models;
 using JobPortal_JobConnect.Services;
 using JobPortal_JobConnect.Services.JobPortal_JobConnect.Services;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JobPortal_JobConnect.Controllers
@@ -12,6 +13,7 @@ namespace JobPortal_JobConnect.Controllers
 
     [Route("api/auth")]
     [ApiController]
+    [EnableCors("AllowSpecificOrigin")]
     public class UserAuthenticationController : ControllerBase
     {
         private readonly IUserAuthService _authService;

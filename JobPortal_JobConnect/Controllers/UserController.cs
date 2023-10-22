@@ -2,12 +2,14 @@
 {
     using JobPortal_JobConnect.Models;
     using JobPortal_JobConnect.Services;
+    using Microsoft.AspNetCore.Cors;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Threading.Tasks;
 
     [Route("api/users")]
     [ApiController]
+    [EnableCors("AllowSpecificOrigin")]
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;

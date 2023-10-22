@@ -4,12 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JobPortal_JobConnect.Controllers
 {
+    using Microsoft.AspNetCore.Cors;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Collections.Generic;
 
     [Route("api/jobs")]
     [ApiController]
+    [EnableCors("AllowSpecificOrigin")] // the CORS policy
     public class JobController : ControllerBase
     {
         private readonly IJobService _jobService;

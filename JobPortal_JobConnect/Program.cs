@@ -32,6 +32,17 @@ builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
 builder.Services.AddScoped<ICandidateService, CandidateService>();
 builder.Services.AddScoped<ICandidateRepository, CandidateRepository>();
 
+//CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder => builder.WithOrigins("http://localhost:3000") // Replace with your React app's origin
+                          .AllowAnyMethod()
+                          .AllowAnyHeader());
+});
+
+
+
 // Configure Swagger
 builder.Services.AddSwaggerGen(c =>
 {
