@@ -16,7 +16,7 @@
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<JobModel>().HasKey(j => j.JobId);
-            modelBuilder.Entity<UserAuthModel>().HasNoKey();
+            modelBuilder.Entity<UserAuthModel>().HasKey(u => u.Id);
             modelBuilder.Entity<User>().HasKey(j => j.UserId);
             modelBuilder.Entity<Candidate>().HasKey(j=>j.CandidateId);
             modelBuilder.Entity<Application>().HasKey(j=>j.ApplicationId);
