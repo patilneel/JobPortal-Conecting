@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using FluentValidation;
 
 namespace JobPortal_JobConnect.Models
 {
@@ -7,18 +8,28 @@ namespace JobPortal_JobConnect.Models
     {
         public int CandidateId { get; set; }
 
-        [Required]
+        
         public string FirstName { get; set; }
 
-        [Required]
         public string LastName { get; set; }
 
-        [Required]
-        public string ContactInfo { get; set; }
+        
+        public string Email { get; set; }
 
-        [MaxLength(500)]
-        public string Skills { get; set; }
-        // Add other properties as needed
+        
+        public string ResumeFile { get; set; }
+
+        public DateTime ApplicationDate { get; set; }
     }
 
+    public class CandidateValidator : AbstractValidator<Candidate>
+    {
+        public CandidateValidator()
+        {
+            RuleFor(candidate => candidate.FirstName).NotEmpty().MaximumLength(50);
+            RuleFor(candidate => candidate.LastName).NotEmpty().MaximumLength(50);
+            RuleFor(candidate => candidate.Email).NotEmpty().EmailAddress();
+            RuleFor(candidate => candidate.ResumeFile).NotEmpty().MaximumLength(100);
+        }
+    }
 }

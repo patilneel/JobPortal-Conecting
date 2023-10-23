@@ -1,6 +1,8 @@
-﻿
-using JobPortal_JobConnect.DBContext;
+﻿using JobPortal_JobConnect.DBContext;
 using JobPortal_JobConnect.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace JobPortal_JobConnect.Repository
 {
@@ -9,6 +11,8 @@ namespace JobPortal_JobConnect.Repository
         IEnumerable<Application> GetApplications();
         Application GetApplication(int applicationId);
         void ApplyForJob(Application application);
+        void UpdateApplication(Application application);
+        void DeleteApplication(int applicationId);
     }
 
     public class ApplicationRepository : IApplicationRepository
@@ -35,7 +39,21 @@ namespace JobPortal_JobConnect.Repository
             _context.Applications.Add(application);
             _context.SaveChanges();
         }
+
+        public void UpdateApplication(Application application)
+        {
+            _context.Update(application);
+            _context.SaveChanges();
+        }
+
+        public void DeleteApplication(int applicationId)
+        {
+            var application = _context.Applications.Find(applicationId);
+            if (application != null)
+            {
+                _context.Applications.Remove(application);
+                _context.SaveChanges();
+            }
+        }
     }
-
-
 }

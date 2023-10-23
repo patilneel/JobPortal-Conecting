@@ -5,12 +5,13 @@ using System.Collections.Generic;
 
 namespace JobPortal_JobConnect.Services
 {
-    
     public interface ICandidateService
     {
         IEnumerable<Candidate> GetCandidates();
         Candidate GetCandidate(int candidateId);
         void CreateCandidate(Candidate candidate);
+        Candidate UpdateCandidate(Candidate candidate);
+        bool DeleteCandidate(int candidateId);
     }
 
     public class CandidateService : ICandidateService
@@ -36,6 +37,15 @@ namespace JobPortal_JobConnect.Services
         {
             _candidateRepository.CreateCandidate(candidate);
         }
-    }
 
+        public Candidate UpdateCandidate(Candidate candidate)
+        {
+            return _candidateRepository.UpdateCandidate(candidate);
+        }
+
+        public bool DeleteCandidate(int candidateId)
+        {
+            return _candidateRepository.DeleteCandidate(candidateId);
+        }
+    }
 }

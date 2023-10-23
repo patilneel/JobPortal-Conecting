@@ -10,6 +10,8 @@ namespace JobPortal_JobConnect.Services
         IEnumerable<Application> GetApplications();
         Application GetApplication(int applicationId);
         void ApplyForJob(Application application);
+        void UpdateApplication(Application application);
+        void DeleteApplication(int applicationId);
     }
 
     public class ApplicationService : IApplicationService
@@ -33,10 +35,17 @@ namespace JobPortal_JobConnect.Services
 
         public void ApplyForJob(Application application)
         {
-            // You can add business logic for application processing, if needed.
             _applicationRepository.ApplyForJob(application);
         }
+
+        public void UpdateApplication(Application application)
+        {
+            _applicationRepository.UpdateApplication(application);
+        }
+
+        public void DeleteApplication(int applicationId)
+        {
+            _applicationRepository.DeleteApplication(applicationId);
+        }
     }
-
-
 }

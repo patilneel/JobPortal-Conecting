@@ -1,5 +1,6 @@
 ﻿using JobPortal_JobConnect.Models;
 using JobPortal_JobConnect.Repository;
+using System.Threading.Tasks;
 
 namespace JobPortal_JobConnect.Services
 {
@@ -8,7 +9,10 @@ namespace JobPortal_JobConnect.Services
         Task<User> GetUserAsync(int userId);
         Task<User> GetUserByUsernameAsync(string username);
         Task<User> CreateUserAsync(User user);
+        Task<User> UpdateUserAsync(User user);
+        Task DeleteUserAsync(int userId);
     }
+
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
@@ -31,6 +35,16 @@ namespace JobPortal_JobConnect.Services
         public Task<User> CreateUserAsync(User user)
         {
             return _userRepository.CreateUserAsync(user);
+        }
+
+        public Task<User> UpdateUserAsync(User user)
+        {
+            return _userRepository.UpdateUserAsync(user);
+        }
+
+        public Task DeleteUserAsync(int userId)
+        {
+            return _userRepository.DeleteUserAsync(userId);
         }
     }
 }
