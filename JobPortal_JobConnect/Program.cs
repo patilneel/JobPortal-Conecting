@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models; // Import OpenApiModels for Swagger
 
 var builder = WebApplication.CreateBuilder(args);
-    
+
 // Add services to the container.
 builder.Services.AddControllers();
 
@@ -32,16 +32,15 @@ builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
 builder.Services.AddScoped<ICandidateService, CandidateService>();
 builder.Services.AddScoped<ICandidateRepository, CandidateRepository>();
 
-//CORS
+// CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
         builder => builder.WithOrigins("http://localhost:3000") // Replace with your React app's origin
                           .AllowAnyMethod()
-                          .AllowAnyHeader());
+                          .AllowAnyHeader()
+                          .AllowCredentials()); // Add this line to allow credentials (cookies) for CORS
 });
-
-
 
 // Configure Swagger
 builder.Services.AddSwaggerGen(c =>
@@ -64,76 +63,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
-app.MapControllers();
 
-app.Run();
-
-
-
-/*using JobPortal_JobConnect.DBContext;
-using JobPortal_JobConnect.Repository;
-using JobPortal_JobConnect.Services;
-using JobPortal_JobConnect.Services.JobPortal_JobConnect.Services;
-using Microsoft.EntityFrameworkCore;
-
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-builder.Services.AddDbContext<JobPortalDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-builder.Services.AddScoped<JobService, JobService>();
-builder.Services.AddScoped<IJobRepository, JobRepository>();
-builder.Services.AddScoped<UserService, UserService>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<UserAuthService, UserAuthService>();
-builder.Services.AddScoped<IUserAuthRepository, UserAuthRepository>();
-builder.Services.AddScoped<ApplicationService, ApplicationService>();
-builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
-builder.Services.AddScoped<CandidateService, CandidateService>();
-builder.Services.AddScoped<ICandidateRepository, CandidateRepository>();
-
-
-
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-*//*builder.Services.AddSwaggerGen(c =>
-{
-    // ... other configuration settings
-
-    c.TagActionsBy(api =>
-    {
-        if (api.GroupName == "UserAuthenticationController")
-            return "1. UserAuthenticationController"; // Order the Authentication group first
-        if (api.GroupName == "User")
-            return "2. User"; // Order the User group second
-        return "3. Other"; // Order other controllers last
-    });
-
-    // ... other configuration settings
-});*//*
-
-
-
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
+// Enable CORS
+app.UseCors("AllowSpecificOrigin");
 
 app.MapControllers();
 
 app.Run();
-*/
